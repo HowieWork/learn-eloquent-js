@@ -23,5 +23,7 @@ Tools to display things on the screen, respond to user input, and communicate ov
 
 ## SELECTED QUOTES
 
-1. Source: Introduction - On Programming
+1. Introduction - On Programming
    > A program is a building of thought. It is costless to build, it is weightless, and it grows easily under our typing hands.
+2. Function
+   > "People think that computer science is the art of geniuses bu the actual reality is the opposite, just many people doing things that build on each other, like a wall of mini stones." - Donald Knuth
