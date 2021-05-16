@@ -2,7 +2,7 @@
 
 This repo contains exercises I have completed for this book and five real projects. Also, selected quotes from this book in the end.
 
-Repo status: `updating`
+Repo status: **updating**
 
 ## PART I: JavaScript language (12 Chpt.)
 
