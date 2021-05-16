@@ -1,6 +1,6 @@
 # Notes for Eloquent Javascript by Marijn Haverbeke
 
-This repo contains exercises I have completed for this book and five real projects.
+This repo contains exercises I have completed for this book and five real projects. Also, selected quotes from this book in the end.
 
 Repo status: updating
 
