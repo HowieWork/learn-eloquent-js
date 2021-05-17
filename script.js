@@ -145,3 +145,79 @@ const countChar = (string, char) => {
 const countBs = (string) => {
   return countChar(string, "B");
 };
+
+// Chpt.4 Data Structures: Objects and Arrays - Exercises
+// #1 THE SUM OF A RANGE
+const range = (start, end) => {
+  let arr = [];
+  for (let i = start; i <= end; i++) arr.push(i);
+  return arr;
+};
+const sum = (arr) => {
+  let sum = 0;
+  // IMPORTANT 'let i of arr' vs. 'let i in arr'
+  for (let i of arr) sum += Number(i);
+  return sum;
+};
+// console.log(sum(range(1, 10)));
+
+// #2 REVERSING AN ARRAY
+const reverse = (arr) => {
+  let newArr = [];
+  for (let i of arr) newArr.unshift(i);
+  return newArr;
+};
+const reverseArrayInPlace = (arr) => {
+  let newArr = [];
+  for (let i of arr) newArr.unshift(i);
+  arr = newArr;
+  return arr;
+};
+// console.log(reverseArrayInPlace([1, 2, 3]));
+
+// IMPORTANT #3 A LIST
+const arrayToList = ([...arr]) => {
+  let list = null;
+  for (let i = arr.length - 1; i >= 0; i--) {
+    list = { value: arr[i], rest: list };
+  }
+  return list;
+};
+const listToArray = (list) => {
+  let arr = [];
+  for (let node = list; node; node = node.rest) {
+    arr.push(node.value);
+  }
+  return arr;
+};
+const testingList = arrayToList([1, 2, 3]);
+// console.log(listToArray(testingList));
+
+const prepend = (value, list) => {
+  return { value, rest: list };
+};
+// console.log(prepend(10, prepend(20, null)));
+
+const nth = (list, n) => {
+  if (!list) return undefined;
+  else if (n === 0) return list.value;
+  else return nth(list.rest, n - 1);
+};
+// console.log(nth(arrayToList([1, 2, 3]), 0));
+
+// IMPORTANT #4 DEEP COMPARISON
+const deepEqual = (m, n) => {
+  if (m === n) return true;
+  if (typeof m != "object" || typeof n != "object" || m == null || n == null)
+    return false;
+  let mKeys = Object.keys(m),
+    nKeys = Object.keys(n);
+  if (mKeys.length != nKeys.length) return false;
+  for (let key of mKeys) {
+    if (!nKeys.includes(key) || !deepEqual(m[key], n[key])) return false;
+  }
+};
+// let obj = { here: { is: "an" }, object: 2 };
+// console.log(deepEqual(obj, obj));
+// console.log(deepEqual(obj, { here: 1, object: 2 }));
+// console.log(deepEqual(obj, { here: { is: "an" }, object: 2 }));
