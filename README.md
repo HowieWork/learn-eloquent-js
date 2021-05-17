@@ -25,5 +25,7 @@ Tools to display things on the screen, respond to user input, and communicate ov
 
 1. Introduction - On Programming
    > A program is a building of thought. It is costless to build, it is weightless, and it grows easily under our typing hands.
-2. Function
+2. Functions
    > "People think that computer science is the art of geniuses bu the actual reality is the opposite, just many people doing things that build on each other, like a wall of mini stones." - Donald Knuth
+3. Functions - Recursion
+   > The dilemma of speed versus elegance ... a continuum between human-friendliness and machine-friendliness...
