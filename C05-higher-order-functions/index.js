@@ -1,7 +1,7 @@
 "use strict";
 
 const SCRIPTS = require("./scripts");
-
+////////////////////////////////////////////
 // Chpt.5 Higher-Order Functions - Examples
 // #1 filter(arr, callback)
 function filter(arr, test) {
@@ -107,3 +107,68 @@ const textScripts = (text) => {
 };
 
 // console.log(textScripts('英国的狗说"woof", 俄罗斯的狗说"тяв"'));
+////////////////////////////////////////////
+// Chpt.5 Higher-Order Functions - Exercises
+// #1 FLATTENING
+let arrays = [[1, 2, 3], [4, 5], [6]];
+arrays.reduce((a, b) => a.concat(b));
+// → [1, 2, 3, 4, 5, 6]
+////////////////////////////////////////////
+// #2 YOUR OWN LOOP
+function loop(value, testFunction, updateFunction, bodyFunction) {
+  // testFunction returns true || false
+  if (!testFunction(value)) return;
+  bodyFunction(value);
+  value = updateFunction(value);
+  return loop(value, testFunction, updateFunction, bodyFunction);
+}
+
+// loop(
+//   3,
+//   (n) => n > 0,
+//   (n) => n - 1,
+//   console.log
+// );
+// → 3
+// → 2
+// → 1
+////////////////////////////////////////////
+// #3 EVERYTHING
+/*
+//ver.1 - loop
+function everyV1(arr, test) {
+  for(let item of arr){
+    if (!test(item)) return false;
+  }
+  return true;
+}
+
+//ver.2 - some method
+function everyV2(arr, test) {
+  // 1. all pass test -> true (same is like every)
+  arr.some((n)=>!test(n)) 
+  // 2. partially pass test -> false (same is different from every)
+  // IMPORTANT HINT: De Morgan's laws: a && b = !(!a || !b)
+  !arr.some((n)=>test(n)) = !arr.some((n)=>!test(n))
+  // 3. none pass test -> false (same is like every)
+  arr.some((n)=>test(n)) 
+}
+*/
+function everyV1(arr, test) {
+  for (let item of arr) {
+    if (!test(item)) return false;
+  }
+  return true;
+}
+function everyV2(arr, test) {
+  return !arr.some((n) => !test(n));
+}
+console.log(everyV2([1, 3, 5], (n) => n < 10));
+// → true
+console.log(everyV2([2, 4, 16], (n) => n < 10));
+// → false
+console.log(everyV2([], (n) => n < 10));
+// → true
+
+////////////////////////////////////////////
+// #4 DOMINANT WRITING DIRECTION
