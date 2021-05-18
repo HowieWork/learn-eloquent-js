@@ -29,3 +29,25 @@ function reduce(arr, combine, start) {
   }
   return current;
 }
+
+// #4 Work with SCRIPTS
+// 4.1 Use reduce(twice) to find the script with the most characters
+const charCount = (script) => {
+  return script.ranges.reduce((count, [from, to]) => {
+    return count + (to - from);
+  }, 0);
+};
+SCRIPTS.reduce((a, b) => {
+  return charCount(a) > charCount(b) ? a : b;
+});
+
+// 4.2 Find the average year of origin for living and dead scripts
+const average = (arr) => {
+  return arr.reduce((a, b) => a + b) / arr.length;
+};
+// Average year of living scripts
+average(SCRIPTS.filter((script) => script.living).map((script) => script.year));
+// Average year of dead scripts
+average(
+  SCRIPTS.filter((script) => !script.living).map((script) => script.year)
+);
