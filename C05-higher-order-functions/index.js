@@ -1,6 +1,6 @@
-"use strict";
+'use strict';
 
-const SCRIPTS = require("./scripts");
+const SCRIPTS = require('./scripts');
 ////////////////////////////////////////////
 // Chpt.5 Higher-Order Functions - Examples
 // #1 filter(arr, callback)
@@ -32,7 +32,7 @@ function reduce(arr, combine, start) {
 
 // #4 Work with SCRIPTS
 // 4.1 Use reduce(twice) to find the script with the most characters
-const charCount = (script) => {
+const charCount = script => {
   return script.ranges.reduce((count, [from, to]) => {
     return count + (to - from);
   }, 0);
@@ -42,21 +42,19 @@ SCRIPTS.reduce((a, b) => {
 });
 
 // 4.2 Find the average year of origin for living and dead scripts
-const average = (arr) => {
+const average = arr => {
   return arr.reduce((a, b) => a + b) / arr.length;
 };
 // Average year of living scripts
-average(SCRIPTS.filter((script) => script.living).map((script) => script.year));
+average(SCRIPTS.filter(script => script.living).map(script => script.year));
 // Average year of dead scripts
-average(
-  SCRIPTS.filter((script) => !script.living).map((script) => script.year)
-);
+average(SCRIPTS.filter(script => !script.living).map(script => script.year));
 
 // 4.3 Recognizing text
 // textScripts('英国的狗说"woof", 俄罗斯的狗说"тяв"')
 
 // Step 1: Given a character code, find the corresponding script (if any)
-const characterScript = (code) => {
+const characterScript = code => {
   for (let script of SCRIPTS) {
     if (
       script.ranges.some(([from, to]) => {
@@ -75,7 +73,7 @@ const countBy = (arr, test) => {
   let newArr = [];
   for (let item of arr) {
     let name = test(item);
-    let known = newArr.findIndex((el) => el.name == name);
+    let known = newArr.findIndex(el => el.name == name);
     if (known == -1) {
       newArr.push({ name, count: 1 });
     } else {
@@ -88,22 +86,22 @@ const countBy = (arr, test) => {
 // -> [{name: false, count: 2},{name:true, count:3}]
 
 // Step 3
-const textScripts = (text) => {
+const textScripts = text => {
   // Count the characters by name
-  let scripts = countBy(text, (char) => {
+  let scripts = countBy(text, char => {
     let script = characterScript(char.codePointAt(0));
-    return script ? script.name : "none";
-  }).filter(({ name }) => name != "none");
+    return script ? script.name : 'none';
+  }).filter(({ name }) => name != 'none');
 
   // Calc total || NOthing found
   let total = scripts.reduce((n, { count }) => n + count, 0);
-  if (total == 0) return "No scripts found";
+  if (total == 0) return 'No scripts found';
 
   return scripts
     .map(({ name, count }) => {
       return `${Math.round((count * 100) / total)}% ${name}`;
     })
-    .join(", ");
+    .join(', ');
 };
 
 // console.log(textScripts('英国的狗说"woof", 俄罗斯的狗说"тяв"'));
@@ -161,7 +159,7 @@ function everyV1(arr, test) {
   return true;
 }
 function everyV2(arr, test) {
-  return !arr.some((n) => !test(n));
+  return !arr.some(n => !test(n));
 }
 // console.log(everyV2([1, 3, 5], (n) => n < 10));
 // // → true
@@ -173,11 +171,11 @@ function everyV2(arr, test) {
 ////////////////////////////////////////////
 // #4 DOMINANT WRITING DIRECTION
 function dominantDirection(text) {
-  let counted = countBy(text, (char) => {
+  let counted = countBy(text, char => {
     let script = characterScript(char.codePointAt(0));
-    return script ? script.direction : "none";
-  }).filter(({ name }) => name != "none");
-  if (counted.length == 0) return "ltr";
+    return script ? script.direction : 'none';
+  }).filter(({ name }) => name != 'none');
+  if (counted.length == 0) return 'ltr';
   return counted.reduce((a, b) => (a.count > b.count ? a : b)).name;
 }
 
